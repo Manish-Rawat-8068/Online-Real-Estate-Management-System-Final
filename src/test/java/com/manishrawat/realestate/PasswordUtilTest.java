@@ -1,0 +1,8 @@
+package com.manishrawat.realestate;
+import com.manishrawat.realestate.util.PasswordUtil;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+class PasswordUtilTest {
+ @Test void hashWorks(){String h=PasswordUtil.hash("test123");assertTrue(PasswordUtil.matches("test123",h));assertFalse(PasswordUtil.matches("wrong",h));}
+ @Test void malformedAndNullHashesFailSafely(){assertFalse(PasswordUtil.matches("test123","$2invalid"));assertFalse(PasswordUtil.matches("test123",null));assertFalse(PasswordUtil.matches(null,"$2a$12$invalid"));}
+}

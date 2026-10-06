@@ -1,0 +1,1 @@
+package com.manishrawat.realestate.model; public class Admin extends User { public Admin(int i,String n,String e,String p,String ph){super(i,n,e,p,"ADMIN",ph);} public String getDashboard(){return "Admin Dashboard";} }

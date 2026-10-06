@@ -1,0 +1,1 @@
+package com.manishrawat.realestate.servlet; import jakarta.servlet.annotation.WebServlet; import jakarta.servlet.http.*; import java.io.*; @WebServlet("/logout") public class LogoutServlet extends HttpServlet{protected void doGet(HttpServletRequest r,HttpServletResponse s)throws IOException{r.getSession().invalidate();s.sendRedirect(r.getContextPath()+"/");}}

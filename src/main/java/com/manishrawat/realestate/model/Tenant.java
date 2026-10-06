@@ -1,0 +1,1 @@
+package com.manishrawat.realestate.model; public class Tenant extends User { public Tenant(int i,String n,String e,String p,String ph){super(i,n,e,p,"TENANT",ph);} public String getDashboard(){return "Tenant Dashboard";} }

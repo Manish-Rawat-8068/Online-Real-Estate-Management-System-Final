@@ -1,0 +1,6 @@
+package com.manishrawat.realestate.dao;
+import com.manishrawat.realestate.util.DBConnection; import java.sql.*; import java.util.*;
+public class SettingsDAO {
+ public Map<String,String> all()throws Exception{Map<String,String> m=new LinkedHashMap<>();try(Connection c=DBConnection.getConnection();PreparedStatement p=c.prepareStatement("SELECT setting_key,setting_value FROM system_settings ORDER BY setting_key");ResultSet r=p.executeQuery()){while(r.next())m.put(r.getString(1),r.getString(2));}return m;}
+ public void put(String key,String value)throws Exception{if(!List.of("site_name","support_email","maintenance_mode").contains(key)||value==null||value.length()>255)throw new IllegalArgumentException("Invalid setting.");if("site_name".equals(key)&&value.isBlank()||"support_email".equals(key)&&!value.isBlank()&&!value.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")||"maintenance_mode".equals(key)&&!List.of("true","false").contains(value))throw new IllegalArgumentException("Invalid setting value.");try(Connection c=DBConnection.getConnection();PreparedStatement p=c.prepareStatement("INSERT INTO system_settings(setting_key,setting_value) VALUES(?,?) ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value)")){p.setString(1,key);p.setString(2,value);p.executeUpdate();}}
+}
